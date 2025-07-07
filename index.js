@@ -26,8 +26,28 @@ document.querySelector(".button-34").addEventListener('click',function(){
                 }
             }
         };
+        for(i=0;i<l.length;i++){
+            document.querySelector("."+l[i]).addEventListener("click",logic2);
+        };
+        function logic2(){
+            if(this.innerHTML=="🎯"){
+                score++;
+                document.querySelector(".scoreboard").innerHTML="<h2 style='font-family:Tron'>Score:"+score;
+                document.querySelector("."+target).innerHTML=target.toUpperCase();
+            }
+            else{
+                lives--;
+                if(lives<=0){
+                    document.querySelector(".Title>h1").innerHTML="Game Over!You fought well, Refresh to Restart.";
+                    clearInterval(x);
+                }
+            }
+        };
         setTimeout(() => {
             document.removeEventListener("keydown",logic);
+            for(i=0;i<l.length;i++){
+            document.querySelector("."+l[i]).removeEventListener("click",logic2);
+        };
             document.querySelector("."+target).innerHTML=target.toUpperCase();
         }, 3000);
         console.log(lives);
